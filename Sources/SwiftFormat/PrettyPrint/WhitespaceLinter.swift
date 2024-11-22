@@ -373,7 +373,8 @@ public class WhitespaceLinter {
     context.findingEmitter.emit(
       message,
       category: category,
-      location: Finding.Location(sourceLocation)
+      location: Finding.Location(sourceLocation),
+      context: context
     )
   }
 

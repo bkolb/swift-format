@@ -513,3 +513,12 @@ fileprivate extension URL {
     #endif
   }
 }
+
+extension Configuration.RuleSeverity {
+    var findingSeverity: Finding.Severity {
+        switch self {
+            case .warning: return .warning
+            case .error: return .error
+        }
+    }
+}
