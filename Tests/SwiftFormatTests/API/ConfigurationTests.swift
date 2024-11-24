@@ -19,14 +19,10 @@ final class ConfigurationTests: XCTestCase {
   }
 
   func testSeverityDecoding() {
-    var config = Configuration()
-    config.ruleSeverity["AlwaysUseLowerCamelCase"] = .warning
-    config.ruleSeverity["AmbiguousTrailingClosureOverload"] = .error
-
     let dictionaryData =
     """
     {
-      "ruleSeverity": {
+      "rules": {
           "AlwaysUseLowerCamelCase": "warning",
           "AmbiguousTrailingClosureOverload": "error",
       }
@@ -36,7 +32,8 @@ final class ConfigurationTests: XCTestCase {
     let jsonConfig =
     try! jsonDecoder.decode(Configuration.self, from: dictionaryData)
 
-    XCTAssertEqual(config, jsonConfig)
+    XCTAssertEqual(jsonConfig.rules["AlwaysUseLowerCamelCase"]!, .warning)
+    XCTAssertEqual(jsonConfig.rules["AmbiguousTrailingClosureOverload"]!, .error)
   }
 
   func testMissingConfigurationFile() throws {
